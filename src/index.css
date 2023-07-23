@@ -1,13 +1,123 @@
-body {
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+}
+:root {
+  --primaryPurple: #646ff0;
+  --black-1: #646681;
+  --black-2: #585858;
+  --bg-1: #f8f8ff;
+  --bg-2: #ecedf6;
+  --bg-3: #cccdde;
+  --gray-1: #eee;
+  --gray-2: #dedfe1;
+  --black: black;
+  --white: white;
+}
+html {
+  font-size: 20px;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-1);
+  margin: 10px;
+}
+* {
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+form {
+  background-color: var(--bg-3);
+  padding: 2.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  border-radius: 50px;
+  padding: 10px 20px;
+  display: flex;
+  margin-bottom: 10px;
+
+  /* flex-direction: column; */
+}
+button,
+select,
+input {
+  background-color: #ffebb3;
+  color: var(--black-2);
+  font-family: inherit;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.2rem 3.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+label {
+  color: var(--black);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.list {
+  background-color: var(--bg-2);
+  color: var(--black-2);
+  padding: 4rem 0;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3.2rem;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.list ul {
+  list-style: none;
+  width: 1000px;
+  /* overflow: scroll; */
+  display: flex;
+  flex-wrap: wrap;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr)); */
+  gap: 1.2rem;
+  justify-content: center;
+  align-content: start;
+}
+
+.list li {
+  margin-right: 100px;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+input[type="checkbox"] {
+  height: 2rem;
+  width: 2rem;
+  accent-color: #e5771f;
+}
+
+.list li button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+  transform: translateY(2px);
 }
