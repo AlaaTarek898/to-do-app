@@ -27,6 +27,9 @@ function App() {
       )
     );
   };
+  function handleClear() {
+    setItem([]);
+  }
 
   return (
     <div className="container">
@@ -37,7 +40,11 @@ function App() {
         handleToggle={handleToggle}
         filteredItems={filteredItems}
       />
-      <Fileration filter={filter} setFilter={setFilter} />
+      <Fileration
+        filter={filter}
+        setFilter={setFilter}
+        handleClear={handleClear}
+      />
     </div>
   );
 }
@@ -90,13 +97,18 @@ function List({ handleToggle, filteredItems }) {
     </Fragment>
   );
 }
-function Fileration({ filter, setFilter }) {
+function Fileration({ filter, setFilter, handleClear }) {
   return (
-    <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-      <option value="complete">completed</option>
-      <option value="incomplete">incomplete</option>
-      <option value="All">All</option>
-    </select>
+    <Fragment>
+      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <option value="complete">completed</option>
+        <option value="incomplete">incomplete</option>
+        <option value="All">All</option>
+      </select>
+      <button className="button" onClick={handleClear}>
+        Clear
+      </button>
+    </Fragment>
   );
 }
 
