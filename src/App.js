@@ -9,7 +9,10 @@ function App() {
     filteredItems = items;
   }
   if (filter === "complete") {
-    filteredItems = items.filter((elem) => elem.status === true);
+    filteredItems = items.filter(
+      (elem) => elem.status === true || elem.status === "true"
+    );
+    console.log(filteredItems);
   }
   if (filter === "incomplete") {
     filteredItems = items.filter((elem) => elem.status === false);
@@ -30,6 +33,10 @@ function App() {
   function handleClear() {
     setItem([]);
   }
+  function handleDelete(e, clickedid) {
+    const deleteOperation = items.filter((el) => clickedid !== el.id);
+    setItem(deleteOperation);
+  }
 
   return (
     <div className="container">
@@ -39,6 +46,7 @@ function App() {
         items={items}
         handleToggle={handleToggle}
         filteredItems={filteredItems}
+        handleDelete={handleDelete}
       />
       <Fileration
         filter={filter}
@@ -53,7 +61,9 @@ export default App;
 
 function Form({ handleItemSubmit }) {
   const [task, setTask] = useState("");
+
   const [status, setStatus] = useState(false);
+
   function handlesubmit(e) {
     e.preventDefault();
     const newTask = {
@@ -61,6 +71,7 @@ function Form({ handleItemSubmit }) {
       task,
       status,
     };
+    console.log(newTask);
     handleItemSubmit(newTask);
     setTask("");
     setStatus(false);
@@ -84,16 +95,45 @@ function Form({ handleItemSubmit }) {
   );
 }
 
-function List({ handleToggle, filteredItems }) {
+function List({ handleToggle, filteredItems, handleDelete }) {
   return (
     <Fragment>
       <div className="list">
         <ul>
           {filteredItems.map((task) => (
-            <ListItem key={task.id} task={task} handleToggle={handleToggle} />
+            <ListItem
+              key={task.id}
+              task={task}
+              handleToggle={handleToggle}
+              handleDelete={handleDelete}
+            />
           ))}
         </ul>
       </div>
+    </Fragment>
+  );
+}
+
+function ListItem({ task, handleToggle, handleDelete }) {
+  return (
+    <Fragment>
+      <li>
+        <span className="item">
+          <input
+            type="checkbox"
+            value={task.status}
+            onChange={(id) => handleToggle(task.id)}
+            checked={task.status ? "checked" : ""}
+          />
+          <span style={task.status ? { textDecoration: "line-through" } : {}}>
+            {task.task}
+          </span>
+        </span>
+
+        <button className="delete1" onClick={(e) => handleDelete(e, task.id)}>
+          Delete
+        </button>
+      </li>
     </Fragment>
   );
 }
@@ -108,24 +148,6 @@ function Fileration({ filter, setFilter, handleClear }) {
       <button className="button" onClick={handleClear}>
         Clear
       </button>
-    </Fragment>
-  );
-}
-
-function ListItem({ task, handleToggle }) {
-  return (
-    <Fragment>
-      <li>
-        <input
-          type="checkbox"
-          value={task.status}
-          onChange={(id) => handleToggle(task.id)}
-          checked={task.status ? "checked" : ""}
-        />
-        <span style={task.status ? { textDecoration: "line-through" } : {}}>
-          {task.task}
-        </span>
-      </li>
     </Fragment>
   );
 }
